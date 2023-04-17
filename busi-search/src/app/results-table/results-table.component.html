@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <div class="container-fluid d-flex justify-content-center">
+
+    <div class="card col-lg-9 result_table_outer">
+      <table class="table table-striped" *ngIf="Business?.length">
+        <thead>
+          <tr>
+            <th scope="col" class="col-0.5">#</th>
+            <th scope="col" class="col-2">Image</th>
+            <th scope="col" class="col-5.5">Business Name</th>
+            <th scope="col " class="col-2">Rating</th>
+            <th scope="col " class="col-2">Distance (miles)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row_height" *ngFor="let business of Business; let i = index" (click)="display_function(i+1)">
+            <td class="index-num">
+              {{i+1}}
+            </td>
+            <td>
+              <img src="{{business.image_url}}" class="result_img" />
+            </td>
+
+            <td>
+              {{business.name}}
+            </td>
+
+            <td>
+              {{business.rating}}
+            </td>
+
+            <td>
+              {{business.distance/1609.344 | number:'1.0-0'}}
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

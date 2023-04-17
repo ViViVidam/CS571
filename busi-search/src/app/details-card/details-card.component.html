@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body *ngIf="BusinessItem">
+  <div class="container-fluid">
+    <div class="card col-lg-6">
+      <i class="bi bi-arrow-left" (click)="goBack()"></i>
+      <!-- <div class="card-body"> -->
+      <h1 class="card-title d-flex justify-content-center">{{BusinessItem.name}}</h1>
+
+      <mat-tab-group [backgroundColor]="'accent'" mat-align-tabs="center" class="tabs">
+        <mat-tab label="Business details">
+          <div class="detail-table">
+
+            <div class="row">
+              <div class="col-lg-6 d-flex flex-column align-items-center">
+                <h3 class="detail-title">Address</h3>
+                <div class="detail-content">
+                  {{BusinessItem.location.address1 + BusinessItem.location.address2 + BusinessItem.location.address3 + ' ' + BusinessItem.location.city +', ' + BusinessItem.location.state + ' ' + BusinessItem.location.zip_code}}
+                </div>
+              </div>
+
+              <div class="col-lg-6 d-flex flex-column align-items-center">
+                <h3 class="detail-title">Category</h3>
+                <div class="detail-content">
+                  {{getCategory(BusinessItem.categories)}}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 d-flex flex-column align-items-center">
+                <h3 class="detail-title">Phone</h3>
+                <div class="detail-content">
+                  {{BusinessItem.phone}}
+                </div>
+              </div>
+
+              <div class="col-lg-6 d-flex flex-column align-items-center">
+                <h3 class="detail-title">Price range</h3>
+                <div class="detail-content">
+                  {{BusinessItem.price}}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 d-flex flex-column align-items-center">
+                <h3 class="detail-title">Status</h3>
+                <div class="detail-content">
+                  <div *ngIf='BusinessItem.is_closed' style="color:#800000">
+                    Close
+                  </div>
+                  <div *ngIf='!BusinessItem.is_closed' style="color:#347235">
+                    Open Now
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 d-flex flex-column align-items-center">
+                <h3 class="detail-title">Visit Yelp for more</h3>
+
+                <div class="detail-content">
+                  <a target="_blank" rel="noopener noreferrer" [href]='BusinessItem.url'>Business Link</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="reserve reserve-btn d-flex justify-content-center" *ngIf="!haskey(BusinessItem.id)">
+                  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit">Reserve Now</button>
+                </div>
+                <div *ngIf="haskey(BusinessItem.id)" class="mb-3 d-flex justify-content-center reserve-btn">
+                  <button type="submit" class="btn btn-primary" (click)="deleteBooking(BusinessItem.id)">Cancel reservation</button>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-lg-12 d-flex flex-column align-items-center">
+                <div class="share d-flex justify-content-center">
+                  <div class="twitter">
+                    Share on:
+                    <a target="_blank" rel="noopener noreferrer" class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check {{BusinessItem.name}} On Yelp.&url={{BusinessItem.url}}"><img class="media tw"
+                        src="../../assets/twitter.png" alt="twitter"> </a>
+                  </div>
+
+                  <div class="facebook">
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u= {{BusinessItem.url}}"><img class="media fb" src="../../assets/facebook.jpg" alt="facebook"></a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-lg-12 d-flex flex-column align-items-center">
+
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                    <img src="{{photos[0]}}" class="w-100 car-img" alt="photo1">
+                    <!-- style="width: 300px!important; height: 300px; margin:0 auto;" -->
+                  </div>
+                </div>
+
+                <div class="carousel-item">
+                  <img src="{{photos[1]}}" class="w-100 car-img" alt="photo2">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{photos[2]}}" class="w-100 car-img" alt="photo3">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+
+            </div>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="Map location">
+          <div class="my-google-map" *ngIf="mapOptions&&marker">
+            <google-map [options]="mapOptions">
+              <map-marker [position]="marker"></map-marker>
+            </google-map>
+          </div>
+        </mat-tab>
+        <mat-tab label="Reviews">
+          <div class="table table-striped">
+            <tbody>
+              <tr *ngFor="let reviews of review; let i = index">
+                <td>
+                  <small class="user">{{reviews.user}}</small>
+                  <br>
+                  <small class="rating">Rating: {{reviews.rating}}/5 </small>
+
+                  <p class="mt-2"><small>{{reviews.text}}</small></p>
+
+
+                  <small>{{reviews.time_created.slice(0,10)}}</small>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </div>
+          <!-- <div class="list-group">
+            <div class="review_col list-group-item" *ngFor="let reviews of review; let i = index">
+
+
+            </div>
+          </div> -->
+        </mat-tab>
+      </mat-tab-group>
+      <br>
+    </div>
+    <!-- </div> -->
+  </div>
+</body>
+
+
+<div bsModal #childModal="bs-modal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Reservation form</h3>
+      </div>
+      <div class="modal-body container">
+        <div *ngIf="BusinessItem" class="businesses-name d-flex justify-content-center">
+          {{BusinessItem.name}}
+        </div>
+        <form #bookingForm #reservationform="ngForm" action="index.html" method="get" (ngSubmit)="submitReservation(reservationform)">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Email</label>
+            <input type="email" #email_test="ngModel" [class.is-invalid]="email_test.invalid && isSubmitted" minlength="1" class="form-control" name="email" ngModel [email]="true" required>
+            <span class="text-danger" *ngIf="isSubmitted && reservationform.controls['email'].errors && reservationform.controls['email'].errors['email']">
+              Email must be a valid email address
+            </span>
+            <span class="text-danger" *ngIf="isSubmitted && reservationform.controls['email'].errors && reservationform.controls['email'].errors['required']">
+              Email is required
+            </span>
+          </div>
+          <div class="mb-3">
+
+            <label for="message-text" class="col-form-label">Date</label>
+            <input class="form-control" #test="ngModel" name="date" type="date" min="{{myDateMin}}" [class.is-invalid]="test.invalid && isSubmitted" ngModel required>
+            <span class="text-danger" *ngIf="isSubmitted && reservationform.controls['date'].errors && reservationform.controls['date'].errors['required']">
+              Date is required
+            </span>
+
+          </div>
+          <div>
+            <label for="message-text" class="col-form-label">Time</label>
+
+            <div class="row mb-3">
+
+              <div class="col-lg-3 col-3">
+                <select id="message-hour" #hour_test="ngModel" [class.is-invalid]="hour_test.invalid && isSubmitted" class="form-control dropdown-toggle" name="hour" ngModel required>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                </select>
+              </div>
+
+              :
+
+              <div class="col-lg-3 col-3">
+                <select id="message-minute" #minute_test="ngModel" [class.is-invalid]="minute_test.invalid && isSubmitted" class="form-control dropdown-toggle" name="minute" ngModel required>
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+
+                </select>
+              </div>
+
+              <div class="col-lg-3 col-3">
+                <i class="bi bi-clock"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 d-flex justify-content-center">
+            <button type="submit" class="btn btn-danger">submit</button>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" #closebutton class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal(reservationform)">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>

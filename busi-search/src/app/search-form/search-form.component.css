@@ -1,0 +1,49 @@
+.card {
+  margin:0 auto;
+  margin-top: 2.5rem;
+}
+
+.title {
+  padding-top: 1.25rem;
+
+}
+
+.form-group {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+
+label {
+  padding-bottom: 5px;
+  font-size: 1rem;
+}
+
+.row {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+}
+
+.check-container {
+  margin-top: 10px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.btn {
+  margin-top: 1rem;
+  margin-bottom: 3%;
+}
+
+.btn-danger {
+  margin-right: 1rem;
+}
+
+.button1:hover {
+  background-color: #A52A2A;
+}
+
+.button2:hover {
+  background-color: #00008B;
+}

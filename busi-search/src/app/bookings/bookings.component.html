@@ -1,0 +1,69 @@
+<div *ngIf="!getLocalLength()">
+  <div class="no-reserve d-flex justify-content-center text-nowrap">
+    <h2>No reservations to show.</h2>
+  </div>
+
+
+</div>
+
+
+<!-- <div class="card mx-auto col-lg-9 table_outer d-flex justify-content-center"> -->
+<div class="container-fluid" *ngIf="getLocalLength()">
+  <div class="title d-flex justify-content-center">
+    <h1>List of your reservations</h1>
+  </div>
+  
+  <div class="table-outer d-flex justify-content-center">
+    <table  class="table bg-white w-50 table-hover" style="text-align:center; border-radius:15px">
+      <thead>
+        <tr>
+          <th scope="col col-0.5">#</th>
+          <th scope="col col-3">Business Name</th>
+          <th scope="col col-3">Date</th>
+          <th scope="col col-2">Time</th>
+          <th scope="col col-3">E-mail</th>
+          <th scope="col col-0.5"> </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let key of localStorageKeys(); let i = index">
+          <td class="index-num">
+            {{i+1}}
+          </td>
+          <td>
+            {{getkey(key).name}}
+
+          </td>
+
+          <td>
+            {{getkey(key).date}}
+          </td>
+
+          <td>
+            {{getkey(key).time}}
+          </td>
+
+          <td>
+            {{getkey(key).email}}
+          </td>
+          <td>
+            <i class="bi bi-trash" (click)="delete(key)"></i>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+
+    </table>
+  </div>
+</div>
+
+<!-- </div> -->
+<!--
+<div class="booking_container" class="d-flex justify-content-center col-lg-9 rounded" style="background-color:white">
+
+
+
+</div> -->

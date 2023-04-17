@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container-fluid" #test>
+      <ul class="nav justify-content-end">
+        <li class="nav-item first_nav">
+          <button #searchbutton autofocus class="nav-link nav-search" routerLink="/search">Search</button>
+        </li>
+        <li class="nav-item second_nav">
+          <button class="nav-link nav-booking" routerLink="/bookings">My Bookings</button>
+        </li>
+      </ul>
+    </div>
+
+    <router-outlet></router-outlet>
+
+  </body>
+
+</html>
+
+
+<!-- <app-search></app-search>
+<app-bookings></app-bookings> -->

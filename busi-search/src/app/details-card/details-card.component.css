@@ -1,0 +1,82 @@
+.card {
+  margin:0 auto;
+  margin-top: 4rem;
+}
+
+.bi-arrow-left {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+}
+
+.detail-table {
+  padding-top: 1rem;
+}
+
+.detail-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.card-title {
+  font-weight: 500;
+}
+
+.detail-content {
+  font-size: 1rem;
+}
+
+.reserve-btn {
+  margin-top: 1.5rem;
+}
+
+.twitter {
+  margin-right: 0.5rem;
+}
+
+.tw {
+  width:1.5rem;
+  height:1.25rem;
+}
+.fb {
+  width:1.5rem;
+  height:1.5rem;
+}
+
+
+.share {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-right: 0.5rem;
+
+}
+
+.carousel-item {
+  margin:0 auto;
+  width: 25rem;
+  height: 30rem;
+}
+
+google-map {
+  width: 200%;
+  height: 100vh;
+}
+
+.user {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.rating {
+  margin-bottom: 0.5rem;
+}
+
+.map-container {
+
+  height:100%;
+  width:100%;
+  padding: 0px;
+  border-width: 0px;
+  margin: 0px;
+  left: 0px;
+}

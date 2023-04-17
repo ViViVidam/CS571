@@ -1,0 +1,31 @@
+.no-reserve {
+  margin-top: 6rem;
+
+  color: red;
+}
+
+i {
+  cursor: pointer;
+}
+
+.card {
+  margin-top: 4rem;
+}
+
+.title {
+  margin-top: 2rem;
+}
+
+.table-outer {
+  margin-top: 1rem;
+}
+
+.index-num {
+  font-weight: bold;
+}
+
+/* @media only screen and (max-width: 400px) {
+  .table-outer {
+    width: 50%;
+  }
+} */

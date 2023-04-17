@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="card col-lg-5">
+      <div class="card-body">
+        <div class="title d-flex justify-content-center">
+          <h2>Business Search</h2>
+        </div>
+
+
+        <form #testing #inputForm="ngForm" action="index.html" method="get" (ngSubmit)="onSubmitTemplateBased(inputForm)">
+
+          <div class="form-group d-lg">
+            <label>Keyword<span style="color:red"> *</span></label>
+
+            <input type="text" class="form-control" [formControl]="keyWordCtrl" list="datalistOptions" name="key" required ngModel />
+            <datalist id="datalistOptions">
+              <option *ngIf="isLoading">
+                Loading...
+              </option>
+              <ng-container *ngIf="!isLoading">
+                <option *ngFor="let option of options" [value]="option">
+              </ng-container>
+            </datalist>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-lg-6">
+              <label>Distance</label>
+              <input type="text" value="10" class="form-control" name="dist" [(ngModel)]='nrInput' />
+
+            </div>
+
+            <div class="form-group col-lg-5">
+              <label for="category">Category<span style="color:red"> *</span></label>
+              <select id="category" class="form-control dropdown-toggle" name="cat" [formControl]="selectCtrl" required>
+                <option value="all" [selected]="true">Default</option>
+                <option value="arts">Arts & Entertainment</option>
+                <option value="health">Health & Medical</option>
+                <option value="hotelstravel">Hotels & Travel</option>
+                <option value="food">Food</option>
+                <option value="professional">Professional Service</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group d-lg">
+            <label>Location<span style="color:red"> *</span></label>
+            <input #locInput type="text" class="form-control" name="loc" ngModel required/>
+          </div>
+
+          <div class="form-check check-container">
+            <input class="form-check-input" name="autoLoc" ngModel type="checkbox" (click)="disableLoc(inputForm)"/>
+            <label class="check_label">Auto-detect my location</label>
+          </div>
+
+          <div class="button-class  d-flex justify-content-center" >
+            <button class="btn btn-danger button1" type="submit">Submit</button>
+            <button class="btn btn-primary button2" (click)="reset_function(inputForm)" type="button">Clear</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="click_index >10">
+    <app-results-table [Business]='Businesses' (isOpen)="onclick_result($event)" ></app-results-table>
+  </ng-container>
+
+  <ng-container *ngIf="click_index > 0 && click_index <= 10">
+    <app-details-card [BusinessItem]='Businesses[click_index-1]' (goback)="onclick_result($event)"></app-details-card>
+  </ng-container>
+
+</body>
+
+</html>

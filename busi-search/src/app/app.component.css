@@ -1,0 +1,30 @@
+
+.nav-link {
+  color: #000000;
+}
+
+.nav-item {
+  padding-top: 10px;
+  font-size: 18px;
+}
+
+.second_nav {
+  padding-right: 30px;
+}
+
+.nav-link {
+  background-color: inherit;
+  border:none;
+}
+
+.nav-search:focus{
+  /* outline: none; */
+  border-radius: 15px;
+  border: 2px solid #000000;
+}
+
+.nav-booking:focus {
+  /* outline: none; */
+  border-radius: 15px;
+  border: 2px solid #000000;
+}
